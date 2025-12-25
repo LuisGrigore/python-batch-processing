@@ -4,12 +4,12 @@ import time
 from unittest.mock import MagicMock, patch
 from queue import Queue
 
-from src.monitor.monitor import WorkerMonitor
-from src.monitor.context import MonitorContext
-from src.monitor.configuration import MonitorConfig
-from src.context import ControlContext
-from src.configuration import FailurePolicy, SharedConfig
-from src.worker_pool.worker_fatal_error import WorkerFatalError
+from src.batch_processing.monitor.monitor import WorkerMonitor
+from src.batch_processing.monitor.context import MonitorContext
+from src.batch_processing.monitor.configuration import MonitorConfig
+from src.batch_processing.context import ControlContext
+from src.batch_processing.configuration import FailurePolicy, SharedConfig
+from src.batch_processing.worker_pool.worker_fatal_error import WorkerFatalError
 
 
 class TestWorkerMonitor:

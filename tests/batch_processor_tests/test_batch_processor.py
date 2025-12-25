@@ -2,13 +2,13 @@ import pytest
 from unittest.mock import MagicMock
 from queue import Empty
 
-from src.batch_processor.batch_processor import BatchProcessor
-from src.batch_processor.context import BatchProcessorContext
-from src.batch_processor.configuration import ProcessorConfig
-from src.batch_processor.exception_info import ExceptionInfo
-from src.batch_processor.worker_reported_error import WorkerReportedError
-from src.context import ControlContext
-from src.configuration import FailurePolicy, SharedConfig
+from src.batch_processing.batch_processor.batch_processor import BatchProcessor
+from src.batch_processing.batch_processor.context import BatchProcessorContext
+from src.batch_processing.batch_processor.configuration import ProcessorConfig
+from src.batch_processing.batch_processor.exception_info import ExceptionInfo
+from src.batch_processing.batch_processor.worker_reported_error import WorkerReportedError
+from src.batch_processing.context import ControlContext
+from src.batch_processing.configuration import FailurePolicy, SharedConfig
 
 
 class TestBatchProcessor:

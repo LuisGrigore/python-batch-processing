@@ -1,9 +1,9 @@
 import pytest
 import time
 
-from src.worker_pool.worker_pool import WorkerPool
-from src.worker_pool.worker import IWorker
-from src.worker_pool.worker_fatal_error import WorkerFatalError
+from src.batch_processing.worker_pool.worker_pool import WorkerPool
+from src.batch_processing.worker_pool.worker import IWorker
+from src.batch_processing.worker_pool.worker_fatal_error import WorkerFatalError
 
 
 class DummyWorker(IWorker):

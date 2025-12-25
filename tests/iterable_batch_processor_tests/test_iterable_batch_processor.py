@@ -3,7 +3,7 @@ import asyncio
 from unittest.mock import MagicMock
 from queue import Empty
 
-from src.iterable_batch_processor.iterable_batch_processor import IterableBatchProcessor
+from src.batch_processing.iterable_batch_processor.iterable_batch_processor import IterableBatchProcessor
 
 
 class TestIterableBatchProcessor:

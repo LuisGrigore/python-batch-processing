@@ -20,7 +20,7 @@ A robust and efficient batch processing library for Python that leverages multip
 - Python 3.8 or higher
 - pip for package management
 
-### Install from Source
+### From Source (Local Development)
 
 1. Clone the repository:
    ```bash
@@ -33,23 +33,55 @@ A robust and efficient batch processing library for Python that leverages multip
    pip install -r requirements.txt
    ```
 
-3. (Optional) Install in development mode:
+3. Install the package locally:
    ```bash
    pip install -e .
    ```
+
+### Usage in Other Projects
+
+Once installed, you can import and use the package in your projects:
+
+```python
+from batch_processing import BatchProcessor, WorkerPool, WorkerMonitor, BatchProcessorContext, ProcessorConfig, ControlContext, FailurePolicy, SharedConfig
+
+# Define your worker function
+def process_item(item):
+    return item * 2
+
+# Create worker factory
+def worker_factory():
+    return process_item
+
+# Set up components
+pool = WorkerPool(n_workers=4, worker_factory=worker_factory, worker_timeout=10.0)
+config = ProcessorConfig(shared=SharedConfig(), on_worker_exception=FailurePolicy.ABORT)
+control_ctx = ControlContext()
+ctx = BatchProcessorContext(config, control_ctx)
+monitor = WorkerMonitor(pool, ctx)
+
+processor = BatchProcessor(pool, monitor, ctx)
+
+# Process items
+with processor:
+    processor.put("item1")
+    processor.put("item2")
+    result1 = processor.get()
+    result2 = processor.get()
+```
 
 ## Usage
 
 ### Basic Batch Processing
 
 ```python
-from src.batch_processor import BatchProcessor
-from src.worker_pool import WorkerPool
-from src.monitor import WorkerMonitor
-from src.batch_processor.context import BatchProcessorContext
-from src.batch_processor.configuration import ProcessorConfig
-from src.context import ControlContext
-from src.configuration import FailurePolicy, SharedConfig
+from batch_processing.batch_processor import BatchProcessor
+from batch_processing.worker_pool import WorkerPool
+from batch_processing.monitor import WorkerMonitor
+from batch_processing.batch_processor.context import BatchProcessorContext
+from batch_processing.batch_processor.configuration import ProcessorConfig
+from batch_processing.context import ControlContext
+from batch_processing.configuration import FailurePolicy, SharedConfig
 
 # Define your worker function
 def process_item(item):
@@ -81,7 +113,7 @@ with processor:
 
 ```python
 import asyncio
-from src.iterable_batch_processor import IterableBatchProcessor
+from batch_processing.iterable_batch_processor import IterableBatchProcessor
 
 async def main():
     # Assuming processor is set up as above
@@ -95,9 +127,9 @@ asyncio.run(main())
 ### Configuration
 
 ```python
-from src.configuration import FailurePolicy, SharedConfig
-from src.monitor.configuration import MonitorConfig
-from src.batch_processor.configuration import BatchProcessorConfig
+from batch_processing.configuration import FailurePolicy, SharedConfig
+from batch_processing.monitor.configuration import MonitorConfig
+from batch_processing.batch_processor.configuration import BatchProcessorConfig
 
 # Shared configuration
 shared_config = SharedConfig(logging=True)
