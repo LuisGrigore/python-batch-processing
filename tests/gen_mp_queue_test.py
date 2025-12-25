@@ -2,12 +2,8 @@ import pytest
 import time
 from queue import Empty, Full
 
-from ..src.gen_mp_queue import GenMPQueue
+from src.gen_mp_queue import GenMPQueue
 
-
-# ---------------------------------------------------------------------------
-# Comportamiento básico
-# ---------------------------------------------------------------------------
 
 def test_queue_starts_empty():
     q = GenMPQueue()
@@ -36,10 +32,6 @@ def test_queue_fifo_order():
     assert q.get(timeout=0.1) == 3
 
 
-# ---------------------------------------------------------------------------
-# nowait semantics (sin asumir disponibilidad inmediata)
-# ---------------------------------------------------------------------------
-
 def test_put_nowait_and_get_nowait_not_strict():
     q = GenMPQueue[str]()
     q.put_nowait("hello")
@@ -62,11 +54,6 @@ def test_put_nowait_full_raises():
     with pytest.raises(Full):
         q.put_nowait(2)
 
-
-# ---------------------------------------------------------------------------
-# Timeouts
-# ---------------------------------------------------------------------------
-
 def test_get_timeout_raises_empty():
     q = GenMPQueue()
     start = time.time()
@@ -87,11 +74,6 @@ def test_put_timeout_raises_full():
 
     assert time.time() - start >= 0.05
 
-
-# ---------------------------------------------------------------------------
-# Estado: full, qsize
-# ---------------------------------------------------------------------------
-
 def test_full_and_qsize():
     q = GenMPQueue(maxsize=2)
     assert q.qsize() == 0
@@ -105,10 +87,6 @@ def test_full_and_qsize():
     assert q.full()
 
 
-# ---------------------------------------------------------------------------
-# Context manager
-# ---------------------------------------------------------------------------
-
 def test_context_manager_closes_queue():
     q = GenMPQueue()
 
@@ -119,10 +97,6 @@ def test_context_manager_closes_queue():
     with pytest.raises((ValueError, OSError)):
         q.put(2)
 
-
-# ---------------------------------------------------------------------------
-# Close / join / cancel
-# ---------------------------------------------------------------------------
 
 def test_close_prevents_further_use():
     q = GenMPQueue()
