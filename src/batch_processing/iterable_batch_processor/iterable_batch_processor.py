@@ -3,7 +3,7 @@ from typing import Generic, Iterable, TypeVar, List
 import asyncio
 from queue import Empty
 
-from ..batch_processor.batch_processor import IBatchProcessor
+from ..batch_processor.batch_processor import BatchProcessor
 
 I = TypeVar("I")
 O = TypeVar("O")
@@ -18,11 +18,11 @@ class IIterableBatchProcessor(Generic[I, O], ABC):
 class IterableBatchProcessor(IIterableBatchProcessor[I, O]):
     def __init__(
         self,
-        batch_processor: IBatchProcessor[I, O],
+        batch_processor: BatchProcessor[I, O],
         in_iterable: Iterable[I],
         n_items: int,
     ):
-        self._batch_processor: IBatchProcessor[I, O] = batch_processor
+        self._batch_processor: BatchProcessor[I, O] = batch_processor
         self._in_iterable: Iterable[I] = in_iterable
         self._out_iterable: List[O] = []
         self._n_items: int = n_items

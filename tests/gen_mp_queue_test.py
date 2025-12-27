@@ -2,7 +2,7 @@ import pytest
 import time
 from queue import Empty, Full
 
-from src.batch_processing.gen_mp_queue import GenMPQueue
+from batch_processing.gen_mp_queue import GenMPQueue
 
 
 def test_queue_starts_empty():

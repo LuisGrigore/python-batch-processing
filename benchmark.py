@@ -3,9 +3,9 @@ import time
 from typing import List
 
 # Importar las clases
-from src.batch_processing.batch_processor.factory import BatchProcessorFactory
-from src.batch_processing.batch_processor.batch_worker import IBatchWorker
-from src.batch_processing.iterable_batch_processor.iterable_batch_processor import IterableBatchProcessor
+from batch_processing.batch_processor.factory import BatchProcessorFactory
+from batch_processing.batch_processor.batch_worker import IBatchWorker
+from batch_processing.iterable_batch_processor.iterable_batch_processor import IterableBatchProcessor
 
 
 class SimpleWorker(IBatchWorker[int, int]):

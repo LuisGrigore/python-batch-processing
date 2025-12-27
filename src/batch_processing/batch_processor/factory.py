@@ -1,5 +1,5 @@
 from typing import Callable, TypeVar, Optional
-from .batch_processor import IBatchProcessor, BatchProcessor
+from .batch_processor import BatchProcessor, BatchProcessor
 from .batch_worker import BatchWorkerExecutor, IBatchWorker
 from .context import BatchProcessorContext
 from .configuration import BatchProcessorConfig, ProcessorConfig
@@ -32,7 +32,7 @@ class BatchProcessorFactory:
         n_workers: int,
         worker_factory: Callable[[], IBatchWorker[I, O]],
         config: BatchProcessorConfig,
-    ) -> IBatchProcessor[I, O]:
+    ) -> BatchProcessor[I, O]:
         """
         Create a complete BatchProcessor from scratch.
 
@@ -81,7 +81,7 @@ class BatchProcessorFactory:
         n_workers: int,
         worker_factory: Callable[[], IBatchWorker[I, O]],
         config: BatchProcessorConfig,
-    ) -> IBatchProcessor[I, O]:
+    ) -> BatchProcessor[I, O]:
         """
         Create a BatchProcessor using existing WorkerPool and WorkerMonitor.
 
@@ -125,7 +125,7 @@ class BatchProcessorFactory:
         worker_monitoring_frequency: float = 1.0,
         logging: bool = True,
         worker_timeout: Optional[float] = None,
-    ) -> IBatchProcessor[I, O]:
+    ) -> BatchProcessor[I, O]:
         """
         Create a BatchProcessor with default settings.
 
